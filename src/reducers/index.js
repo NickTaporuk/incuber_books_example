@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import header from './header';
+import search from './search';
+import sidebar from './sidebar';
 
 export default combineReducers({
-    header
+    search,
+    sidebar
 });
