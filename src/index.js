@@ -12,7 +12,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {orange500, deepOrange500} from 'material-ui/styles/colors'
-import Paper from 'material-ui/Paper';
 
 import Dashboard from './containers/Dashboard';
 import IndexPage from './components/pages/IndexPage';
