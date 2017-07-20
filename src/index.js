@@ -7,12 +7,10 @@ import thunk from 'redux-thunk';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import logger from 'redux-logger';
 import reducers from './reducers';
-
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { amber700 } from 'material-ui/styles/colors'
-
 import Dashboard from './containers/Dashboard';
 import DashboardGoBack from './containers/DashboardGoBack';
 import IndexPage from './components/pages/IndexPage';
