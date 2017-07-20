@@ -2,20 +2,21 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router'
 import AppBar from 'material-ui/AppBar';
-import SearchBar from 'material-ui-search-bar';
+import SearchBar from './../searchbar/SearchBar';
 import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
 import SearchIcon from 'material-ui/svg-icons/action/search';
 import ListIcon from 'material-ui/svg-icons/content/sort';
 import TableIcon from 'material-ui/svg-icons/navigation/apps';
 import { SIDEBAR_ACTUAL_STATE } from './../../constants/reducers/sidebar'
+import { SEARCH_FILTER_BY_CHARACTERS } from './../../constants/reducers/search'
+import { CONTENT_VIEW_STATE, CONTENT_VIEW_TABLE, CONTENT_VIEW_LIST } from './../../constants/reducers/contentView'
 
 class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchOpened : false,
-            contentStructure : 'List'
+            searchOpened : false
         };
 
         this.onFocus = this.onFocus.bind(this);
@@ -49,11 +50,11 @@ class Header extends Component {
                     this.state.searchOpened
                         ?
                             <SearchBar
-                                ref={ (searchInput) => { this.searchInput = searchInput}}
                                 id='search'
-                                onBlur={() => { this.setState({searchOpened : false});console.log('onBlur this.searchInput:', this.searchInput.refs)}}
-                                onChange={() => console.log('onChange')}
-                                onRequestSearch={() => console.log('onRequestSearch')} />
+                                onBlur={() => { this.setState({searchOpened : false})}}
+                                onChange={() => {}}
+                                onRequestSearch={() => {}}
+                            />
                         :
                             <IconButton
                                 touch
@@ -63,19 +64,19 @@ class Header extends Component {
                             </IconButton>
                 }
                 {
-                    this.state.contentStructure === 'List'
+                    this.props.contentView == CONTENT_VIEW_LIST
                         ?
                             <IconButton
                                 touch
                                 iconStyle={{color : "#ffffff"}}
-                                onClick={() => { this.setState({contentStructure : 'Table'});}}>
+                                onClick={ () => { this.props.onChangeContentView(CONTENT_VIEW_TABLE); }}>
                                 <ListIcon />
                             </IconButton>
                         :
                             <IconButton
                                 touch
                                 iconStyle={{color : "#ffffff"}}
-                                onClick={() => { this.setState({contentStructure : 'List'});}}>
+                                onClick={() => { this.props.onChangeContentView( CONTENT_VIEW_LIST );}}>
                             <TableIcon />
                         </IconButton>
                 }
@@ -95,16 +96,17 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-    const { sidebar } = state;
+    const { sidebar, contentView } = state;
     return {
-        sidebar
+        sidebar,
+        contentView
     }
 }
 
 export default connect(
     mapStateToProps,
     dispatch => ({
-        onClickHeaderRightIconMenu : (RightIconMenuEventClick) => {
+        onClickHeaderRightIconMenu (RightIconMenuEventClick) {
             const payload = {
                 sidebar : {
                     visible : RightIconMenuEventClick
@@ -112,6 +114,22 @@ export default connect(
             };
 
             dispatch({ type: SIDEBAR_ACTUAL_STATE , payload})
+        },
+
+        onSearchFilterChange(searchFilterCharacters) {
+            const payload = {
+                searchFilterCharacters
+            };
+
+            dispatch({ type: SEARCH_FILTER_BY_CHARACTERS , payload})
+        },
+
+        onChangeContentView(contentView) {
+            const payload = {
+                contentView
+            };
+
+            dispatch({ type: CONTENT_VIEW_STATE , payload})
         }
     })
 )(withRouter(Header));

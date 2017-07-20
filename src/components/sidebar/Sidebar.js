@@ -2,39 +2,28 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router'
 import Drawer from 'material-ui/Drawer';
-import { List, ListItem } from 'material-ui/List'
-import { NavLink, Redirect } from 'react-router-dom'
-import IconButton from 'material-ui/IconButton';
 import Paper from 'material-ui/Paper';
-import TableIcon from 'material-ui/svg-icons/navigation/apps';
+import HomeIcon from 'material-ui/svg-icons/action/home';
 import { SIDEBAR_ACTUAL_STATE } from './../../constants/reducers/sidebar'
+import MenuItem from 'material-ui/MenuItem';
 
 class Sidebar extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-        const { sidebar, onRequestChangeByDocument } = this.props;
+        const { history, sidebar, onRequestChangeByDocument } = this.props;
         return (
             <Paper>
-                <Drawer open={ sidebar.visible } docked={ false } onRequestChange={() => onRequestChangeByDocument(!sidebar.visible)}>
-                    <List>
-                        <NavLink  exact to="/" onClick={() => { onRequestChangeByDocument(false)}}>
-                            <ListItem>Home</ListItem>
-                        </NavLink>
-                    </List>
+                <Drawer  open={ sidebar.visible } docked={ false } onRequestChange={() => onRequestChangeByDocument(!sidebar.visible)}>
+                        <MenuItem onClick={() => { onRequestChangeByDocument(false); history.push("/")}} primaryText="Home" leftIcon={<HomeIcon/>} />
                 </Drawer>
             </Paper>
         );
     }
 }
 
-
 function mapStateToProps(state) {
     const { sidebar } = state;
 
-    console.log('%s sidebar: ', this.displayName);
     return {
         sidebar
     }

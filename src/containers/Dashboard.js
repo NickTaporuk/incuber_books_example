@@ -1,16 +1,13 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Header from './../components/header/Header'
-import Sidebar from './../components/sidebar/Sidebar'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Header from './../components/header/Header';
+import Sidebar from './../components/sidebar/Sidebar';
 
 export default (ComposedComponent) => {
     class Dashboard extends Component {
-        constructor(props) {
-            super(props);
-        }
 
         render() {
-            return(
+            return (
                 <div>
                     <Header/>
                     <Sidebar/>

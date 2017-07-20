@@ -13,7 +13,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,...action.payload.sidebar
             };
-            break;
 
         default: return state;
     }

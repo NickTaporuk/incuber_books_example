@@ -1,7 +1,7 @@
 import { SEARCH_FILTER_BY_CHARACTERS } from './../constants/reducers/search'
 
 const initialState = {
-    filterCharacters : '',
+    searchFilterCharacters : '',
 };
 
 export default function (state = initialState, action) {
@@ -9,9 +9,8 @@ export default function (state = initialState, action) {
 
         case SEARCH_FILTER_BY_CHARACTERS :
             return {
-                ...state,filterCharacters: action.payload.filterCharacters
+                ...state,...action.payload
             };
-        break;
 
         default: return state;
     }
