@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router'
-import GridListView from './../../views/GridListView'
 import GridBooksView from './../../views/GridBooksView'
 import { SET_BOOKS_DATA_IN_PROGRESS, SET_BOOKS_DATA_SUCCESS } from './../../constants/reducers/data'
 import dummyBooksJson from './../../dummyData/books.json';
