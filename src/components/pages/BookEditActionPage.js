@@ -3,15 +3,13 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import TextField from 'material-ui/TextField';
 import NotFoundBooks from './../notFoundBooks/NotFoundBooks';
-import {imgBooksPathRoot}  from './../../constants/images/images';
-import {GridList, GridTile} from 'material-ui/GridList';
 import DatePicker from 'material-ui/DatePicker';
 import {capitalizeFirstLetterEachSentence} from './../../helpers/stringFormatting';
-import {timestampToDate} from './../../helpers/dateFormatting';
 import RaisedButton from 'material-ui/RaisedButton';
 import {CHANGE_BOOK_ITEM, DELETE_BOOK_ITEM} from './../../constants/reducers/data';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import GridBooksView from './../../views/GridBooksView';
 import { red500 } from 'material-ui/styles/colors'
 
 const styles = {
@@ -82,23 +80,7 @@ class BookEditActionPage extends Component {
                 <div className="preview-book">
                     <div style={styles.root}>
                         <div className="preview-title">Preview :</div>
-
-                        <GridList
-                            cellHeight={350}
-                            style={styles.gridList}
-                            cols={1}
-                        >
-                            < GridTile
-                                style={ styles.GridTile }
-                                key={ 1 }
-                                title={ capitalizeFirstLetterEachSentence(editBook.title) }
-                                subtitle={
-                                    <span>by <b>{ editBook.author }</b><br/><span>{ timestampToDate(editBook.timestamp) }</span></span> }
-                            >
-                                <img key={ 1 } src={ `/${process.env.PUBLIC_URL}${imgBooksPathRoot}${editBook.img}` }/>
-                            </GridTile>
-                        </GridList>
-
+                        <GridBooksView booksPreview={ [editBook] }/>
                         <div className="edit-box">
                             <div className="edit-title">Edit :</div>
                             <form>
