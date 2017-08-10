@@ -12,7 +12,8 @@ class IndexPage extends Component {
 
         const self = this;
 
-        if(this.props.books.length === 0) makeRequest(self.props.onSetBooksDataLoaded, dummyBooksJson.books, 2000)
+        if(this.props.books.length === 0) 
+            makeRequest(self.props.onSetBooksDataLoaded, dummyBooksJson.books, 2000)
                 .then((resolve) => {
                     self.props.onSetBooksData(resolve);
                     self.props.onSetBooksDataLoaded(true);
